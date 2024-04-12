@@ -10,7 +10,7 @@ export class Apartment {
   @Column()
   house_name: string;
 
-  @OneToOne(() => Address)
+  @OneToOne(() => Address, {cascade: true, eager: true})
   @JoinColumn()
   address: Address;
 
@@ -29,9 +29,7 @@ export class Apartment {
   @Column()
   count_of_kitchen: number;
 
-  @ManyToOne(() => Landlord)
+  @ManyToOne(() => Landlord, {cascade: true, eager: true})
   landlord: Landlord;
 
-  @Column()
-  end_of_subscription: Date;
 }

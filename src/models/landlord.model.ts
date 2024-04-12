@@ -6,7 +6,7 @@ export class Landlord {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => Person)
+  @OneToOne(() => Person, {cascade: true, eager: true})
   @JoinColumn()
   person: Person;
 }

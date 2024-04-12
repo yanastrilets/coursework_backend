@@ -1,37 +1,27 @@
-import {
-  IsAlphanumeric,
-  IsEmail,
-  IsEnum,
-  IsInt,
-  IsNotEmpty,
-  IsString,
-  Matches,
-  MinLength,
-} from 'class-validator';
+
 export class CreateApartmentDto {
 
-  @IsString()
-  @MinLength(2, { message: 'Name must have atleast 2 characters.' })
-  @IsNotEmpty()
+  house_name: string;
+  description: string;
+  price_per_night: number;
+  count_of_room: number;
+  count_of_bathroom: number;
+  count_of_kitchen: number;
+
+  //address
+  avenue: string;
+  number_of_house: number;
+  number_of_flat: number;
+  city: string;
+  country: string;
+
+
+  //landlord
+
   name: string;
-
-  @IsNotEmpty()
-  @MinLength(3, { message: 'Username must have atleast 3 characters.' })
-  @IsAlphanumeric(null, {
-    message: 'Username does not allow other than alpha numeric chars.',
-  })
-  username: string;
-
-  @IsNotEmpty()
-  @IsEmail(null, { message: 'Please provide valid Email.' })
+  surname: string;
+  date_of_birth: Date;
+  phone: string;
   email: string;
-
-  @IsInt()
-  age: number;
-
-  @IsString()
-  @IsEnum(['f', 'm', 'u'])
-  gender: string;
-
 
 }

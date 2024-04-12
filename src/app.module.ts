@@ -17,6 +17,9 @@ import { PersonModule } from './person/person.module';
 import { AddressModule } from './address/address.module';
 import { ReserveStatusModule } from './reserve_status/reserve_status.module';
 import { TenantModule } from './tenant/tenant.module';
+import { AuthModule } from './auth/auth.module';
+import {JwtModule} from "@nestjs/jwt";
+import {jwtConstants} from "./auth/auth.service";
 
 @Module({
   imports: [
@@ -25,10 +28,15 @@ import { TenantModule } from './tenant/tenant.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'rootroot',
-      database: 'bookin_db',
+      password: 'root',
+      database: 'yana_db',
       entities: [Address, Apartment, Booking, Landlord, Payment, Person, Refunds, ReserveStatus, Review, Tenant, User],
       synchronize: true,
+    }),
+    JwtModule.register({
+      global: true,
+      secret: jwtConstants.secret,
+      signOptions: { expiresIn: '60m' },
     }),
     ApartmentModule,
     UserModule,
@@ -36,6 +44,7 @@ import { TenantModule } from './tenant/tenant.module';
     AddressModule,
     ReserveStatusModule,
     TenantModule,
+    AuthModule,
   ],
 })
 export class AppModule {}

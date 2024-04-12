@@ -16,6 +16,10 @@ export class ApartmentController {
   findAll() {
     return this.apartmentService.findAll();
   }
+  @Get('/rating')
+  findByBestRating() {
+    return this.apartmentService.findWithBestRating();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

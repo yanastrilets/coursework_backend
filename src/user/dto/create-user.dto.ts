@@ -12,10 +12,6 @@ const passwordRegEx =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,20}$/;
 
 export class CreateUserDto {
-  @IsString()
-  @MinLength(2, { message: 'Name must have atleast 2 characters.' })
-  @IsNotEmpty()
-  name: string;
 
   @IsNotEmpty()
   @MinLength(3, { message: 'Username must have atleast 3 characters.' })
@@ -23,10 +19,6 @@ export class CreateUserDto {
     message: 'Username does not allow other than alpha numeric chars.',
   })
   username: string;
-
-  @IsNotEmpty()
-  @IsEmail(null, { message: 'Please provide valid Email.' })
-  email: string;
 
   @IsNotEmpty()
   @Matches(passwordRegEx, {
@@ -37,4 +29,7 @@ export class CreateUserDto {
     one special character`,
   })
   password: string;
+
+  role: number;
+
 }
