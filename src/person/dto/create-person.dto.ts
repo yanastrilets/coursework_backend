@@ -7,6 +7,7 @@ import {
   IsPhoneNumber,
   Matches
 } from 'class-validator';
+import { Column } from "typeorm";
 
 export class CreatePersonDto {
   @IsString()
@@ -28,4 +29,6 @@ export class CreatePersonDto {
   @IsNotEmpty({ message: 'Email must not be empty.' })
   @IsEmail({}, { message: 'Please provide a valid Email.' })
   email: string;
+
+  passport_info: string;
 }

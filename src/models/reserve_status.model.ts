@@ -6,7 +6,7 @@ export class ReserveStatus {
   id: number;
 
   @Column()
-  status: string;
+  reserve_status: string;
 
   @Column()
   count_of: number;

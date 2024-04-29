@@ -1,3 +1,4 @@
+import { Column } from "typeorm";
 
 export class CreateApartmentDto {
 
@@ -17,11 +18,6 @@ export class CreateApartmentDto {
 
 
   //landlord
-
-  name: string;
-  surname: string;
-  date_of_birth: Date;
-  phone: string;
-  email: string;
-
+  landlordId: number;
+  photos: string[];
 }

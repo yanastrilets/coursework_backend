@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from './user.model';
 import { Apartment } from './apartment.model';
+import { Booking } from "./booking.model";
 
 @Entity()
 export class Review {
@@ -10,8 +11,8 @@ export class Review {
   @ManyToOne(() => User)
   user: User;
 
-  @ManyToOne(() => Apartment)
-  apartment: Apartment;
+  @ManyToOne(() => Booking)
+  booking: Booking;
 
   @Column()
   created_at: Date;

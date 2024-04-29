@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, ManyToOne } from "typeorm";
 import { User } from './user.model';
 import { Person } from './person.entity';
 
@@ -7,17 +7,15 @@ export class Tenant {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => User)
+  @ManyToOne(() => User)
   @JoinColumn()
   user: User;
 
-  @Column()
+  @Column({nullable:true})
   count_of_booking: number;
 
-  @Column()
-  passport_info: string;
 
-  @OneToOne(() => Person, {cascade: true})
+  @OneToOne(() => Person, {cascade: true, eager: true})
   @JoinColumn()
   person: Person;
 }

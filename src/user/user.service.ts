@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import {InjectRepository} from "@nestjs/typeorm";
-import {User} from "../models/user.model";
-import {Repository} from "typeorm";
+import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { User } from "../models/user.model";
+import { Repository } from "typeorm";
+import { Role } from "../models/user.role";
 
 @Injectable()
 export class UserService {
@@ -12,11 +13,11 @@ export class UserService {
 
 
   create(createUserDto: CreateUserDto) {
-    return this.userRepository.save({...createUserDto});
+    return this.userRepository.save({...createUserDto, role:Role.USER});
   }
 
   findAll() {
-    return `This action returns all user`;
+    return this.userRepository.find();
   }
 
   findOne(id: number) {

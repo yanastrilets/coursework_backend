@@ -17,6 +17,7 @@ export class PersonService {
     person.date_of_birth = createPersonDto.date_of_birth;
     person.phone = createPersonDto.phone;
     person.email = createPersonDto.email;
+    person.passport_info = createPersonDto.passport_info;
     return this.personRepository.save(person);
   }
 

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { TenantService } from './tenant.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
+import { Tenant } from "../models/tenant.model";
 
 @Controller('tenant')
 export class TenantController {
@@ -15,6 +16,10 @@ export class TenantController {
   @Get()
   findAll() {
     return this.tenantService.findAll();
+  }
+  @Get('/user/:id')
+  findAllFromOneUser(@Param('id') userId: number): Promise<Tenant[]> {
+    return this.tenantService.findAllFromOneUser(userId);
   }
 
   @Get(':id')

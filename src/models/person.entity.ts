@@ -20,4 +20,7 @@ export class Person {
   @Column()
   email: string;
 
+  @Column({ nullable: true})
+  passport_info: string;
+
 }

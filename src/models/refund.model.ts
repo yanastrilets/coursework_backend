@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, OneToOne
 import { Booking } from './booking.model';
 
 @Entity()
-export class Refunds {
+export class Refund {
   @PrimaryGeneratedColumn()
   id: number;
 

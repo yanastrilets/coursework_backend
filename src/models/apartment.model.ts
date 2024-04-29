@@ -20,6 +20,9 @@ export class Apartment {
   @Column('decimal')
   price_per_night: number;
 
+  @Column({ nullable: true})
+  final_price: number;
+
   @Column()
   count_of_room: number;
 
@@ -32,4 +35,6 @@ export class Apartment {
   @ManyToOne(() => Landlord, {cascade: true, eager: true})
   landlord: Landlord;
 
+  @Column('text', { array: true, default: () => "array[]::text[]" , nullable: true})
+  photos: string[];
 }

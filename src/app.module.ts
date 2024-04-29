@@ -5,7 +5,7 @@ import { Booking } from "./models/booking.model";
 import { Landlord } from "./models/landlord.model";
 import { Payment } from "./models/payment.model";
 import { Person } from "./models/person.entity";
-import { Refunds } from "./models/refund.model";
+import { Refund } from "./models/refund.model";
 import { ReserveStatus } from "./models/reserve_status.model";
 import { Review } from "./models/review.model";
 import { Tenant } from "./models/tenant.model";
@@ -20,6 +20,11 @@ import { TenantModule } from './tenant/tenant.module';
 import { AuthModule } from './auth/auth.module';
 import {JwtModule} from "@nestjs/jwt";
 import {jwtConstants} from "./auth/auth.service";
+import { BookingModule } from './booking/booking.module';
+import { LandlordModule } from './landlord/landlord.module';
+import { PaymentModule } from './payment/payment.module';
+import { ReviewModule } from './review/review.module';
+import { RefundModule } from './refund/refund.module';
 
 @Module({
   imports: [
@@ -28,9 +33,9 @@ import {jwtConstants} from "./auth/auth.service";
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'root',
-      database: 'yana_db',
-      entities: [Address, Apartment, Booking, Landlord, Payment, Person, Refunds, ReserveStatus, Review, Tenant, User],
+      password: 'rootroot',
+      database: 'bookin_db',
+      entities: [Address, Apartment, Booking, Landlord, Payment, Person, Refund, ReserveStatus, Review, Tenant, User],
       synchronize: true,
     }),
     JwtModule.register({
@@ -45,6 +50,11 @@ import {jwtConstants} from "./auth/auth.service";
     ReserveStatusModule,
     TenantModule,
     AuthModule,
+    BookingModule,
+    LandlordModule,
+    PaymentModule,
+    ReviewModule,
+    RefundModule,
   ],
 })
 export class AppModule {}

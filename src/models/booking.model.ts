@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Tenant } from './tenant.model';
 import { Apartment } from './apartment.model';
 import { ReserveStatus } from './reserve_status.model';
+import { Status } from "./status";
 
 @Entity()
 export class Booking {
@@ -17,8 +18,8 @@ export class Booking {
   @Column()
   created_at: Date;
 
-  @ManyToOne(() => ReserveStatus)
-  status: ReserveStatus;
+  @Column()
+  status: Status;
 
   @Column()
   check_in: Date;
