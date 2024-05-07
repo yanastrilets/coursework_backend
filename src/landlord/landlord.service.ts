@@ -5,6 +5,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Person } from "../models/person.entity";
 import { Repository } from "typeorm";
 import { Landlord } from "../models/landlord.model";
+import { Tenant } from "../models/tenant.model";
 
 @Injectable()
 export class LandlordService {
@@ -34,7 +35,15 @@ export class LandlordService {
   findAll() {
     return this.landlordRepository.find();
   }
-
+  async findAllLandlordsSorted(sortField: string = "name", sortOrder: "ASC" | "DESC" = "ASC"): Promise<Landlord[]> {
+    return this.landlordRepository.find({
+      order: {
+        person: {
+          [sortField]: sortOrder
+        }
+      }, relations: ["person"]
+    });
+  }
   findOne(id: number) {
     return this.landlordRepository.findOne({where: {id: id}});
   }

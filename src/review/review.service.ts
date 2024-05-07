@@ -38,8 +38,14 @@ export class ReviewService {
   findOne(id: number) {
     return this.reviewRepository.findOneBy({id: id});
   }
+  getByBooking(idbook: number) {
+    return this.reviewRepository.findOneBy({booking: {id: idbook}});
+  }
   findForOneApartment(id: number) {
     return this.reviewRepository.find({where:{ booking: { apartment: { id: id }} }});
+  }
+  findAllByUserId(userId: number){
+    return this.reviewRepository.find({where: {booking: {tenant: {user: {id: userId}}}}})
   }
   findForOneUser(id: number) {
     return this.reviewRepository.find({where:{ user: { id: id } }});

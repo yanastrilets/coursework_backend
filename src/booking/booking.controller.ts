@@ -17,6 +17,10 @@ export class BookingController {
     return this.bookingService.findAll();
   }
 
+  @Patch('/reject/:id')
+  update(@Param('id') id: string) {
+    return this.bookingService.update(+id);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.bookingService.findOne(+id);
@@ -28,11 +32,6 @@ export class BookingController {
   @Get('user/:id')
   getAllFromOneUser(@Param('id') id: number) {
     return this.bookingService.findFromOneUser(id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
-    return this.bookingService.update(+id, updateBookingDto);
   }
 
   @Delete(':id')

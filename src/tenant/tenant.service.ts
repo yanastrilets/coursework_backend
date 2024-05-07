@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { CreateTenantDto } from './dto/create-tenant.dto';
-import { UpdateTenantDto } from './dto/update-tenant.dto';
+import { Injectable } from "@nestjs/common";
+import { CreateTenantDto } from "./dto/create-tenant.dto";
+import { UpdateTenantDto } from "./dto/update-tenant.dto";
 import { Tenant } from "../models/tenant.model";
 import { Person } from "../models/person.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
+import { OrderByCondition, Repository } from "typeorm";
 import { User } from "../models/user.model";
 
 @Injectable()
@@ -13,12 +13,13 @@ export class TenantService {
     @InjectRepository(Tenant) private tenantRepository: Repository<Tenant>,
     @InjectRepository(User) private userRepository: Repository<User>,
     @InjectRepository(Person) private personRepository: Repository<Person>
-  ) {}
+  ) {
+  }
 
   async create(createTenantDto: CreateTenantDto): Promise<Tenant> {
     const user = await this.userRepository.findOneBy({ id: createTenantDto.userId });
     if (!user) {
-      throw new Error('User not found');
+      throw new Error("User not found");
     }
     const person = new Person();
     person.name = createTenantDto.name;
@@ -39,18 +40,24 @@ export class TenantService {
     return this.tenantRepository.save(tenant);
   }
 
-  async findAllFromOneUser(userId: number): Promise<Tenant[]> {
+  async findAllFromOneUser(userId: number, sortField: string = "name", sortOrder: "ASC" | "DESC" = "ASC"): Promise<Tenant[]> {
     return this.tenantRepository.find({
       where: { user: { id: userId } },
-      relations: ['person'] // Додаємо завантаження пов'язаної особи
+      relations: ["person"],
+      order: {
+        person: {
+          [sortField]: sortOrder
+        }
+      }
     });
   }
-  findAll(){
+
+  findAll() {
     return this.tenantRepository.find();
   }
 
   findOne(id: number) {
-    return this.tenantRepository.find({where: {id: id}, relations: ['person']});
+    return this.tenantRepository.find({ where: { id: id }, relations: ["person"] });
   }
 
   update(id: number, updateTenantDto: UpdateTenantDto) {

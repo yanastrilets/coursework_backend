@@ -11,7 +11,7 @@ export class CreateAddressDto {
   number_of_house: number;
 
   @IsOptional()
-  @IsNumber() // Allow optional flat number with type validation
+
   number_of_flat?: number;
 
   @IsNotEmpty({ message: 'City name is required.' })
@@ -20,7 +20,6 @@ export class CreateAddressDto {
   city: string;
 
   @IsNotEmpty({ message: 'Country name is required.' })
-  @IsString()
-  @Length(2, 50, { message: 'Country name must be between 2 and 50 characters.' })
+
   country: string;
 }

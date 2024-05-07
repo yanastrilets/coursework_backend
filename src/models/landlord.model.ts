@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, OneToOne, JoinColumn, Column } from "typeorm";
 import { Person } from './person.entity';
 
 @Entity()
@@ -9,4 +9,7 @@ export class Landlord {
   @OneToOne(() => Person, {cascade: true, eager: true})
   @JoinColumn()
   person: Person;
+
+  @Column({nullable: true})
+  host_id: number
 }

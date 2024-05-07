@@ -50,10 +50,17 @@ export class BookingService {
     return this.bookingRepository.find({where: {tenant: {user: {id:id}}}, relations: ['apartment', 'tenant']});
   }
 
-  update(id: number, updateBookingDto: UpdateBookingDto) {
-    return `This action updates a #${id} booking`;
-  }
+  async update(id: number) : Promise<Booking> {
+    const booking = await this.bookingRepository.findOneBy({ id: id });
 
+    if (!booking) {
+      throw new NotFoundException(`Booking with ID ${id} not found`);
+    }
+
+    booking.status = Status.REJECTED;
+
+    return this.bookingRepository.save(booking);
+  }
   remove(id: number) {
     return `This action removes a #${id} booking`;
   }

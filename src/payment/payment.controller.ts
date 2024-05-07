@@ -16,6 +16,10 @@ export class PaymentController {
   findAll() {
     return this.paymentService.findAll();
   }
+  @Get('/get-last')
+  getSumOfLast() {
+    return this.paymentService.getAllPaymentsSummary();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

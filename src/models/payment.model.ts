@@ -12,6 +12,9 @@ export class Payment {
   @Column('decimal')
   sum: number;
 
+  @Column('decimal')
+  sum_incomes: number;
+
   @OneToOne(() => Booking)
   @JoinColumn()
   booking: Booking;

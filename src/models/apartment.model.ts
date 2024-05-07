@@ -17,10 +17,10 @@ export class Apartment {
   @Column('text')
   description: string;
 
-  @Column('decimal')
+  @Column('decimal', { precision: 10, scale: 1 })
   price_per_night: number;
 
-  @Column({ nullable: true})
+  @Column('decimal', { precision: 10, scale: 1, nullable: true })
   final_price: number;
 
   @Column()

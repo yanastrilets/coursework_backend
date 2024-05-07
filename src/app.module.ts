@@ -25,6 +25,7 @@ import { LandlordModule } from './landlord/landlord.module';
 import { PaymentModule } from './payment/payment.module';
 import { ReviewModule } from './review/review.module';
 import { RefundModule } from './refund/refund.module';
+import { DatasetModule } from './dataset/dataset.module';
 
 @Module({
   imports: [
@@ -55,6 +56,7 @@ import { RefundModule } from './refund/refund.module';
     PaymentModule,
     ReviewModule,
     RefundModule,
+    DatasetModule,
   ],
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from "@nestjs/common";
 import { TenantService } from './tenant.service';
 import { CreateTenantDto } from './dto/create-tenant.dto';
 import { UpdateTenantDto } from './dto/update-tenant.dto';
@@ -18,9 +18,14 @@ export class TenantController {
     return this.tenantService.findAll();
   }
   @Get('/user/:id')
-  findAllFromOneUser(@Param('id') userId: number): Promise<Tenant[]> {
-    return this.tenantService.findAllFromOneUser(userId);
+  findAllFromOneUser(
+    @Param('id') userId: number,
+    @Query('sortField') sortField: string = 'name',  // Значення за замовчуванням
+    @Query('sortOrder') sortOrder: 'ASC' | 'DESC' = 'ASC'  // Значення за замовчуванням
+  ): Promise<Tenant[]> {
+    return this.tenantService.findAllFromOneUser(userId, sortField, sortOrder);
   }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {

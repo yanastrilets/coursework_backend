@@ -1,14 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectEntityManager, InjectRepository } from "@nestjs/typeorm";
 import { CreateAddressDto } from './dto/create-address.dto';
 import { Address } from '../models/address.model';
-import { Repository } from 'typeorm';
+import { EntityManager, Repository } from "typeorm";
 import { UpdateAddressDto } from "./dto/update-address.dto";
 
 @Injectable()
 export class AddressService {
   constructor(
     @InjectRepository(Address) private readonly addressRepository: Repository<Address>,
+    @InjectEntityManager() private entityManager: EntityManager
   ) {}
 
   create(createAddressDto: CreateAddressDto): Promise<Address> {
@@ -29,6 +30,13 @@ export class AddressService {
   findOne(id: number): Promise<Address | undefined> {
     return this.addressRepository.findOneBy({ id });
   }
+  findAllCountries(): Promise<string[]> {
+    return this.addressRepository.query(`SELECT DISTINCT country FROM address`);
+  }
+  findAllCities(): Promise<string[]> {
+    return this.addressRepository.query(`SELECT DISTINCT city FROM address`);
+  }
+
 
   update(id: number, updateAddressDto: UpdateAddressDto): Promise<Address> {
     const address = new Address();

@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from "@nestjs/common";
 import { LandlordService } from './landlord.service';
 import { CreateLandlordDto } from './dto/create-landlord.dto';
 import { UpdateLandlordDto } from './dto/update-landlord.dto';
+import { Apartment } from "../models/apartment.model";
+import { Landlord } from "../models/landlord.model";
 
 @Controller('landlord')
 export class LandlordController {
@@ -16,7 +18,13 @@ export class LandlordController {
   findAll() {
     return this.landlordService.findAll();
   }
-
+  @Get('/sorted')
+  findAllSorted(
+    @Query('sortField') sortField: string = 'name',
+    @Query('sortOrder') sortOrder: 'ASC' | 'DESC' = 'ASC'  // Значення за замовчуванням
+  ): Promise<Landlord[]> {
+    return this.landlordService.findAllLandlordsSorted(sortField, sortOrder);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.landlordService.findOne(+id);

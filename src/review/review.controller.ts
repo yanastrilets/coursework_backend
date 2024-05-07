@@ -16,7 +16,15 @@ export class ReviewController {
   findAll() {
     return this.reviewService.findAll();
   }
+  @Get('/user/:userId')
+  getReviewsByUserId(@Param('userId') userId: number) {
+    return this.reviewService.findAllByUserId(userId);
+  }
 
+  @Get(':idbook')
+  getByBooking(@Param('idbook') idbook: string) {
+    return this.reviewService.getByBooking(+idbook);
+  }
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.reviewService.findOne(+id);

@@ -25,7 +25,7 @@ export class RefundService {
     const refund = new Refund();
     refund.created_at = createRefundDto.created_at;
     refund.booking = booking;
-    refund.sum = booking.price * 0.95;
+    refund.sum = booking.price;
     return this.refundRepository.save(refund);
   }
 

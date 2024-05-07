@@ -16,6 +16,14 @@ export class AddressController {
   findAll() {
     return this.addressService.findAll();
   }
+  @Get('/countries')
+  findAllCountries() {
+    return this.addressService.findAllCountries();
+  }
+  @Get('/cities')
+  findAllCities() {
+    return this.addressService.findAllCities();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
